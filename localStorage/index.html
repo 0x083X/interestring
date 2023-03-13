@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://requirejs.org/docs/release/2.3.6/r.js"></script>
+</head>
+<body>
+    <script type="module">
+        import {localStorageF} from './index.js'
+        // const localStorageF = require("./index.js")
+        const a = new localStorageF() 
+        a.set('aa',123132,new Date().getTime() + 500)
+        setInterval(() => {
+            console.log(a.get('aa'))
+        }, 50);
+    </script>
+</body>
+</html>
