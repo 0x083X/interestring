@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        1
+    </div>
+    <script type="module">
+        import {reactive} from './reactive.js'
+        import {trigger, track, effect } from './effect.js'
+        const data = reactive({
+            name : 'kgx' ,
+            age : 18 ,
+            ss : {
+                k : 1
+            }
+        })
+        effect(()=>{
+            document.querySelector("#app").innerHTML = `data : ${data.name} -- age : ${data.age} -- 深层次 ${data.ss.k}`
+        })
+        setTimeout(() => {
+            data.name = 'kgx1'
+            data.ss.k = 222
+        }, 2000);
+        
+    </script>
+</body>
+</html>
