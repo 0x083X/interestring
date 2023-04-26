@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://lib.baomitu.com/vue/3.0.2/vue.global.js"></script>
+    <title>单页面使用Vue</title>
+</head>
+
+<body>
+    <div id="app">
+        <table border>
+            <thead>
+                <tr>
+                    <td>名称</td>
+                    <td>单价</td>
+                    <td>数量</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in data" :key="index">
+                    <td>{{item.name}}</td>
+                    <td>{{item.price}}</td>
+                    <td><button @click="addOrDel(item,false)">-</button>{{item.num}}<button
+                            @click="addOrDel(item,true)">+</button></td>
+                    <td><button @click="Del(index)">删除</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>总价:{{costs}}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+    <script type="module">
+        // import {data1} from './data.js'
+        const { createApp, reactive, toRefs, computed } = Vue;
+        const data = reactive([
+            {
+                name: '裤子',
+                price: 100,
+                num: 1
+            },
+            {
+                name: '内裤',
+                price: 50,
+                num: 1
+            },
+            {
+                name: '电脑',
+                price: 800,
+                num: 1
+            }
+        ])
+        const addOrDel = (item, flag) => { //增减函数
+            if (item.num > 1 && flag == false)
+                item.num--
+            if (item.num < 99 && flag == true)
+                item.num++
+        }
+        const Del = (index) => {  //删除函数
+            data.splice(index, 1)
+        }
+        let costs = computed(() => {
+            return data.reduce((pre, next) => { //调用数组的reduce方法
+                return pre + (next.num * next.price)
+            },0)  //将第一个pre初始化为0
+        })
+        const app = createApp({
+            setup() {
+                return {
+                    data,
+                    addOrDel,
+                    Del,
+                    costs,
+                    // ...toRefs(data)
+                }
+            }
+        });
+        app.mount("#app");
+    </script>
+</body>
+
+</html>
