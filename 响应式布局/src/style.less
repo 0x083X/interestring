@@ -1,0 +1,102 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+:root {
+    --bg-color: #ccc;
+    --bg1-color: white;
+    --breakpoint-l: 1200px; // => home 缩进左侧bar
+    --breakpoint-m: 992px; // => home headBar缩进
+    --breakpoint-s: 768px; // => home 右侧bar缩进
+}
+
+.show {
+    display: block;
+}
+
+@media screen and (max-width : 1200px) {
+
+    // => 缩进左边框
+    html {
+        div.lN-out {
+            display: none !important;
+        }
+
+        div.hm-content {
+            width: 1000px !important;
+        }
+    }
+
+}
+
+@media screen and (max-width: 992px) {
+
+    // => 缩进右边框
+    html {
+        div.rN-out {
+            display: none !important;
+        }
+
+        div.hm-content {
+            width: 95vw !important;
+
+            div.gmCt-out {
+                width: 100% !important;
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    // => 缩进navs
+
+    html {
+        .out {
+            min-width: 340px !important;
+        }
+        .logo {
+            width: fit-content !important;
+
+            .logo1 {
+                display: none;
+            }
+
+            .logo2 {
+                display: block !important;
+            }
+        }
+
+        li.main-nav-list {
+            position: relative !important;
+            &>ul {
+                display: none !important;
+                position: absolute !important;
+                top:  1rem !important;
+            }
+            &>i {
+                display: block !important;
+            }
+            &:hover {
+                ul.cu {
+                    display: block !important;
+                    li {
+                        width: fit-content !important;
+                    }
+                }
+            }
+        }
+    }
+}
