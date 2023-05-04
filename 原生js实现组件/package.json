@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "rollup": "^3.21.4",
+    "rollup-plugin-babel": "^4.4.0"
+  },
+  "name": "custom-elements",
+  "version": "1.0.0",
+  "main": "button.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build" : "rollup -c"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
