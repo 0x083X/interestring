@@ -23,8 +23,7 @@ onMounted(() => {
     <div>Hello!</div>
     <div>js解析结束时间{{ endTime1 - startTime }}</div>
     <div>渲染结束时间 {{ endTime2 - startTime }}</div>
-    <RouterLink :to="{name:'timeSlice'}">go to timeSplice</RouterLink>
-    <RouterLink :to="{name:'virtualList'}">  go to virtualList</RouterLink>
+    <RouterLink :to="'/'">to index</RouterLink>
     <ul>
 
     </ul>

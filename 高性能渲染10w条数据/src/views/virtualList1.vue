@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import { ref, reactive, onMounted, computed, onUpdated } from 'vue'
+import {RouterLink} from 'vue-router'
 let listData = ref<object[]>(new Array(50).fill(0).map((item, index) => { return { id: index, height: Math.floor(Math.random() * 50 + 100) } })) // => 列表数据
 let estimatedItemSize = ref(100) // => 预估高度
 let height = ref() // => 容器高度
@@ -25,7 +26,6 @@ const initPositions = () => { // => 初始化positions
     })
 }
 
-let a = ref(0)
 const list = ref('')
 const visibleCount = computed(() => { // => 可视区域元素个数
     return Math.ceil(screenHeight.value / estimatedItemSize.value)
@@ -102,7 +102,9 @@ const scrollEvent = () => { // => 滚动事件
 </script>
 
 <template>
-    <span>{{ a }}</span>
+    <RouterLink :to="{name:'index'}">原生渲染</RouterLink>
+    <RouterLink :to="{name:'timeSlice'}">  时间分片</RouterLink>
+    <RouterLink :to="{name:'virtualList'}">  固定高度的虚拟列表</RouterLink>
     <div class="_main" @scroll="scrollEvent" ref="list">
         <div class="_phantom" :style="{height:height+'px'}"></div>
         <div class="_content">

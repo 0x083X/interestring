@@ -9,6 +9,8 @@ const routes = [
     },
     {
         path:'/virtualList', component:()=>import('../views/virtualList.vue'),name:'virtualList'
+    }, {
+        path : '/index', component: () => import('../views/index.vue') , name:'index'
     }
 ]
 

@@ -1,5 +1,6 @@
 <script setup lang='ts'> 
 import {ref,reactive,onMounted,computed} from 'vue'
+import {RouterLink} from 'vue-router'
 let listData = ref(new Array(50).fill(0).map((item,index)=>item + index)) // => 数据
 // console.log(listData.value)
 let height = ref(50) // => 每个数据的高度(固定)
@@ -37,6 +38,7 @@ onMounted(()=>{
 </script>
 
 <template>
+    <RouterLink :to="'/'">to index</RouterLink>
     <div class="main"> 
         <div class="phantom" :style="{height:listHeight+'px',}"></div> <!--占位元素-->
         <div class="content" :style="{transform:`translate3d(0, ${currentOffset}px, 0)`}"> <!--内容-->
