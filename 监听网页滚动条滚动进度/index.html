@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>监听网页滚动条滚动进度</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        div.progress {
+            position: fixed;
+            top: 0;
+            height: 4px;
+            width: 0;
+            background-color: pink;
+        }
+        div._big {
+            height: 4000px;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress"></div>
+    <div>
+        <div class="_big"></div>
+    </div>
+    <script>
+        const scrollF = () => {
+            let pageHeight = document.body.scrollHeight || document.documentElement.scrollHeight // => 页面高度
+            let screenHeight = document.documentElement.clientHeight || document.body.clientHeight // => 浏览器视口高度
+            let scrollHigh = document.body.scrollTop || document.documentElement.scrollTop // => 距离顶部的高度
+            let canScroll = pageHeight - screenHeight // => 浏览器可以滚动的高度
+            const progress = document.querySelector('.progress') 
+            progress.style.width = scrollHigh / canScroll * 100 + '%'
+            console.log( scrollHigh / canScroll * 100 + '%')
+            flag = true
+        }
+        // => 用requestAnimationFrame来代替settimeout进行节流,并且优化动画
+        let s 
+        let flag = true
+        window.addEventListener('scroll',() => {
+            if(flag) {
+                flag = false
+                window.requestAnimationFrame(scrollF) // => 用requestAnimationFrame 比settimeout更加丝滑
+                // setTimeout(() => {
+                //     scrollF()
+                //     flag = true
+                // }, 16);
+            }
+        })
+        
+    </script>
+</body>
+</html>
