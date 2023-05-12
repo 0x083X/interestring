@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容后进先出加载效果</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        main.main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        .content {
+            width: 600px;
+            height: 400px;
+            line-height: 400px;
+            text-align: center;
+            background-color: skyblue;
+            margin-top: 20px;
+            transition: all 0.2s ease-in; 
+        }
+        .content:nth-of-type(even) {
+            transform: translate(200%);
+        }
+        .content:nth-of-type(odd) {
+            transform: translate(-200%);
+        }
+        .content.center {
+            transform: translate(0,0);
+        }
+    </style>
+</head>
+
+<body>
+    <main class="main">
+        <div class="content">1</div>
+        <div class="content">2</div>
+        <div class="content">3</div>
+        <div class="content">4</div>
+    </main>
+</body>
+
+
+<script>
+    window.onload = () => {
+        show()
+    }
+    let flag = true
+    window.addEventListener('scroll',function(){
+        if(flag) {
+            flag = false
+            window.requestAnimationFrame(show)
+            // setTimeout(() => {
+            //     flag = true
+            //     show()
+            // }, 4000);
+        }
+    })
+    function show() {
+        let contents = document.querySelectorAll('div.content')
+        let targetValue = window.innerHeight * 0.8 // => innerHeight是视口高度
+        // console.log(targetValue)
+        contents.forEach(item => {
+            let contentTop = item.getBoundingClientRect().top // => 获取dom实例顶部距离视口的高度
+            if(contentTop <= targetValue) 
+                item.classList.add('center')
+            else item.classList.remove('center')
+        })
+        create()
+    }
+    let num = 5
+    function create() {
+        flag = true
+        let pageHeight = document.documentElement.scrollHeight // 页面高度
+        let stop = document.documentElement.scrollTop // => 视口距离顶部的距离
+        let screenHeight = window.innerHeight     // => 视口高度
+        let bottom = pageHeight - stop - screenHeight // => 视口底部距离页面底部的距离
+        if(bottom < 200 ){
+            //创建新元素
+            let div = document.createElement('div')
+            div.classList.add('content')
+            div.innerHTML = `${num}`
+            num++
+            document.querySelector('main.main').appendChild(div)
+        }
+    }
+</script>
+</html>
